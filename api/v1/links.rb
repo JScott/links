@@ -1,15 +1,13 @@
-require 'grape'
-
 module API
   module V1
     class Links < Grape::API
-      version 'v1'
-      format :json
-
       resource :links do
+        version 'v1'
+        format :json
+      
         desc "Return list of links"
         get do
-          return {debug: 'debug'};
+          {debug: 'debug'}
         end
       end
     end
