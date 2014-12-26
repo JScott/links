@@ -8,9 +8,10 @@ Feature: Links API
 
   Scenario: Add a link
     When I POST to /v1/links?url=https://google.com
-    Then the response returns OK
+    Then the response code is 201
 
   Scenario: List links
     When I GET to /v1/links
-    Then an array of strings is returned
+    Then the response code is 200
+    And an array of strings is returned
     And the response is not empty
