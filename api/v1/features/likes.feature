@@ -9,7 +9,7 @@ Feature: Likes API
 
   Scenario: Add a like
     When I POST to /v1/likes?url=https://google.com
-    Then the response is true
+    Then the response returns true
 
   Scenario: List likes
     When I GET to /v1/likes?url=https://google.com

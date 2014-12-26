@@ -8,7 +8,7 @@ Feature: Links API
 
   Scenario: Add a link
     When I POST to /v1/links?url=https://google.com
-    Then the response is OK
+    Then the response returns OK
 
   Scenario: List links
     When I GET to /v1/links
