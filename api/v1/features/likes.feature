@@ -7,16 +7,25 @@ Feature: Likes API
     Given a Redis database
 
   Scenario: Add a like
-    Given I am logged in
+    Given that I am logged in
     When I POST to /v1/likes?url=https://google.com
     Then the response code is 201
 
-  Scenario: Login required to add a like
+  Scenario: Add a like requires login
     When I POST to /v1/likes?url=https://google.com
     Then the response code is 401
+
+  Scenario: Add a like requires a URL
+    Given that I am logged in
+    When I POST to /v1/likes
+    Then the response code is 400
 
   Scenario: List likes
     When I GET to /v1/likes?url=https://google.com
     Then the response code is 200
     And an array of strings is returned
     And the response is not empty
+
+  Scenario: List likes requires a URL
+    When I GET to /v1/likes
+    Then the response code is 400

@@ -12,10 +12,10 @@ module API
           redis.smembers 'links'
         end
 
+        params do
+          requires :url, type: String
+        end
         post do
-          params do
-            requires :url, type: String
-          end
           redis.sadd 'links', params[:url]
         end
       end

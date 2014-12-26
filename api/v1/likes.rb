@@ -13,7 +13,6 @@ module API
         params do 
           requires :url, type: String
         end
-
         get do
           redis.smembers "#{params[:url]}:likes"
         end
@@ -23,7 +22,9 @@ module API
           login_as user if authorized
           authorized
         end
-
+        params do 
+          requires :url, type: String
+        end
         post do
           redis.sadd "#{params[:url]}:likes", current_user
         end

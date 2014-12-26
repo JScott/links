@@ -10,6 +10,10 @@ Feature: Links API
     When I POST to /v1/links?url=https://google.com
     Then the response code is 201
 
+  Scenario: Add a link requires a URL
+    When I POST to /v1/links
+    Then the response code is 400
+
   Scenario: List links
     When I GET to /v1/links
     Then the response code is 200
