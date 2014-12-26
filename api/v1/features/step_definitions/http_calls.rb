@@ -14,5 +14,5 @@ end
 When /^I (.*?) to (.*?)$/ do |method, url|
   url = "http://localhost:9292#{url}"
   method = method.downcase.to_sym
-  @last_response = HTTParty.method(method).call(url, { basic_auth: @credentials })
+  @last_response = HTTParty.method(method).call(url, { basic_auth: @credentials, body: {} })
 end
