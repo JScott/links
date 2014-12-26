@@ -25,7 +25,6 @@ module API
         end
 
         post do
-          puts current_user
           redis.sadd "#{params[:url]}:likes", current_user
         end
       end

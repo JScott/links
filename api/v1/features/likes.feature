@@ -11,6 +11,10 @@ Feature: Likes API
     When I POST to /v1/likes?url=https://google.com
     Then the response code is 201
 
+  Scenario: Login required to add a like
+    When I POST to /v1/likes?url=https://google.com
+    Then the response code is 401
+
   Scenario: List likes
     When I GET to /v1/likes?url=https://google.com
     Then the response code is 200
