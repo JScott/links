@@ -7,7 +7,7 @@ Feature: Likes API
     Given a Redis database
 
   Scenario: Add a like
-    Given that I am logged in
+    Given that I log in
     When I POST to /v1/likes?url=https://google.com
     Then the response code is 201
 
@@ -16,7 +16,7 @@ Feature: Likes API
     Then the response code is 401
 
   Scenario: Add a like requires a URL
-    Given that I am logged in
+    Given that I log in
     When I POST to /v1/likes
     Then the response code is 400
 

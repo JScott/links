@@ -1,3 +1,3 @@
-Given /^that I am logged in$/ do
+Given /^that I log in$/ do
   @credentials = {:username => "test", :password => "password1"}
 end
