@@ -4,3 +4,7 @@ Then /^an array of strings is returned$/ do
     expect(item).to be_a(String)
   end
 end
+
+Then /^the response is not empty$/ do
+  expect(@last_response).to_not be_empty
+end
