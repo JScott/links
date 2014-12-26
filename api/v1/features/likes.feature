@@ -5,13 +5,14 @@ Feature: Likes API
 
   Background:
     Given a Redis database
-    And I am logged in
 
   Scenario: Add a like
+    Given I am logged in
     When I POST to /v1/likes?url=https://google.com
-    Then the response returns true
+    Then the response code is 201
 
   Scenario: List likes
     When I GET to /v1/likes?url=https://google.com
-    Then an array of strings is returned
+    Then the response code is 200
+    And an array of strings is returned
     And the response is not empty

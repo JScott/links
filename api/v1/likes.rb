@@ -18,8 +18,14 @@ module API
           redis.smembers "#{params[:url]}:likes"
         end
 
+        http_basic do |user, password|
+          authorized = { 'test' => 'password1' }[user] == password
+          login_as user if authorized
+          authorized
+        end
+
         post do
-          require_login
+          puts current_user
           redis.sadd "#{params[:url]}:likes", current_user
         end
       end
