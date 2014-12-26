@@ -6,15 +6,19 @@ Feature: Links API
   Background:
     Given a Redis database
 
-  Scenario Outline: Add and get links
-    When I <method> <url>
-    Then the response is <response>
+  Scenario: Add a link
+    When I POST /v1/links/add?url=https://google.com
+    Then the response is OK
 
-    Examples:
-      | method | url                                  | response      |
-      | POST   | /v1/links/add?url=https://google.com | OK            |
-      | GET    | /v1/links?url=https://google.com     | {"likes":"0"} |
+  Scenario: Link details
+    When I GET /v1/links?url=https://google.com
+    Then the response is {"likes":"0"}
 
-  Scenario: Get list of links
+  Scenario: List links
     When I GET /v1/links
-    Then an array of links is returned
+    Then an array of strings is returned
+
+  Scenario: Like a link
+    When I POST /v1/links/like?url=https://google.com
+    And I GET /v1/links?url=https://google.com
+    Then the response is {"likes":"1"}
