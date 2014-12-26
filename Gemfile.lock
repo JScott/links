@@ -39,6 +39,7 @@ GEM
       rack (>= 0.4)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
+    redis (3.2.0)
     thread_safe (0.3.4)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
@@ -53,3 +54,4 @@ PLATFORMS
 
 DEPENDENCIES
   grape
+  redis
