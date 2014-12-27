@@ -7,18 +7,12 @@ Feature: Users API
     Given a Redis database
 
   Scenario: Add a user
-    Given that I log in
-    When I POST to /v1/users?email=test@email.com
+    When I POST to /v1/users?user=test&password=test&email=test@email.com
     Then the response code is 201
 
-  Scenario: Add a user requires an email
-    Given that I log in
+  Scenario: Add a user requires credentials
     When I POST to /v1/users
     Then the response code is 400
-
-  Scenario: Add a user requires credentials
-    When I POST to /v1/users?email=test@email.com
-    Then the response code is 401
 
   Scenario: List users
     When I GET to /v1/users

@@ -1,32 +1,29 @@
 require_relative '../helpers/redis'
-require_relative '../helpers/user'
 
 module API
   module V1
-    class Likes < Grape::API
-      resource :likes do
+    class Users < Grape::API
+      resource :users do
         version 'v1'
         format :json
         helpers API::RedisHelper
-        helpers API::UserHelper
       
-        params do 
-          requires :url, type: String
-        end
         get do
-          redis.smembers "#{params[:url]}:likes"
+          redis.smembers "users"
         end
 
-        http_basic do |user, password|
-          authorized = { 'test' => 'password1' }[user] == password
-          login_as user if authorized
-          authorized
-        end
         params do 
-          requires :url, type: String
+          requires :email, type: String #, regexp: /.+@.+/  
+          requires :user, type: String, regexp: /^[^:]*$/
+          requires :password, type: String
         end
         post do
-          redis.sadd "#{params[:url]}:likes", current_user
+          redis.sadd "users", params[:user]
+          #TODO: salt the password
+          #TODO: passwords via params are terrible
+          redis.hmset "users:#{params[:user]}",
+                      'password', params[:password],
+                      'email', params[:email]
         end
       end
     end

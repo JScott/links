@@ -14,7 +14,7 @@ module API
           requires :url, type: String
         end
         get do
-          redis.smembers "#{params[:url]}:likes"
+          redis.smembers "likes:#{params[:url]}"
         end
 
         http_basic do |user, password|
@@ -26,7 +26,7 @@ module API
           requires :url, type: String
         end
         post do
-          redis.sadd "#{params[:url]}:likes", current_user
+          redis.sadd "likes:#{params[:url]}", current_user
         end
       end
     end
